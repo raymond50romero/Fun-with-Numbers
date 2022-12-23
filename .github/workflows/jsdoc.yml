@@ -20,5 +20,5 @@ jobs:
           source_dir: ./src
           # recurse through all the folders in that directory
           recurse: true
-          # output the documentation to a new folder, out
-          output_dir: ./out
+          # output the documentation to a new folder
+          output_dir: ./docs
