@@ -1,0 +1,24 @@
+name: JSDoc
+on: 
+  push:
+    branches: [master, mathLogic]
+  pull_request:
+    branches: [master, mathLogic]
+jobs:
+  make-docs:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout code we will be documenting
+      - name: Checkout code
+        uses: actions/checkout@v3
+      # create the documentation
+      - name: Make documentation
+        uses: andstor/jsdoc-action@v1
+        # set the options we want
+        with:
+          # read code from src directory
+          source_dir: ./src
+          # recurse through all the folders in that directory
+          recurse: true
+          # output the documentation to a new folder, out
+          output_dir: ./out
