@@ -1,0 +1,24 @@
+name: Prettier
+on: 
+  push: 
+    branches: [master, mathLogic]
+  pull_request:
+    branches: [master, mathLogic] 
+# jobs to run when running the prettier
+jobs: 
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout the code for github actions
+      - name: Checkout code 
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      # run the prettifier on all the code 
+      - name: Prettify code
+        uses: creyD/prettier_action@v4.2
+        with:
+          # option to only use prettier on javascript and markdown
+          prettier_options: --write **/*.{js,md}
+          commit_message: Code has been formated with prettier

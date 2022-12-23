@@ -1,0 +1,30 @@
+name: Linter
+on:
+  # whenever something is pushed or a pull request is made to these branches 
+  # then the linter will run
+  push: 
+    branches: [master, mathLogic]
+  pull_request:
+    branches: [master, mathLogic]
+# these are the jobs that this file will run when called
+jobs:
+  run-lint:
+    # set up the enviornment where this linter will run
+    runs-on: ubuntu-latest
+    # the steps that will be taken 
+    steps:
+      # first we checkout the code for github actions to read
+      - name: Checkout code 
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      # then we run the linter against our code
+      - name: Run linter
+        uses: github/super-linter@v4
+        env:
+          # we use this to remove formating for our linter. We will use prettier 
+          VALIDATE_JAVASCRIPT_STANDARD: false
+          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_JSCPD: false
+          DEFAULT_BRANCH: "master"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
